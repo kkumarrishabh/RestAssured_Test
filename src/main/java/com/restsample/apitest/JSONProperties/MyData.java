@@ -7,47 +7,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 public class MyData{
-	  private int page; 
-	  private int perPage; 
-	  private int total; 
-	  private int totalPages; 
-	  private List<Data> data; 
-	  private Support support; 
+	  private List<Results> results; 
+	  private Info info; 
 
-	  public int getPage(){
-	  	return page; 
+	  public List<Results> getResults(){
+	  	return results; 
 	  }
-	  public void setPage(int input){
-	  	 this.page = input;
+	  public void setResults(List<Results> input){
+	  	 this.results = input;
 	  }
-	  public int getPerPage(){
-	  	return perPage; 
+	  public Info getInfo(){
+	  	return info; 
 	  }
-	  public void setPerPage(int input){
-	  	 this.perPage = input;
-	  }
-	  public int getTotal(){
-	  	return total; 
-	  }
-	  public void setTotal(int input){
-	  	 this.total = input;
-	  }
-	  public int getTotalPages(){
-	  	return totalPages; 
-	  }
-	  public void setTotalPages(int input){
-	  	 this.totalPages = input;
-	  }
-	  public List<Data> getData(){
-	  	return data; 
-	  }
-	  public void setData(List<Data> input){
-	  	 this.data = input;
-	  }
-	  public Support getSupport(){
-	  	return support; 
-	  }
-	  public void setSupport(Support input){
-	  	 this.support = input;
+	  public void setInfo(Info input){
+	  	 this.info = input;
 	  }
 }

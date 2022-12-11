@@ -4,9 +4,9 @@
         <listener class-name="com.restsample.apitest.listeners.TestStatusListener"/>
         <listener class-name="com.restsample.apitest.listeners.AnnotationTransformer"/>
     </listeners>
-    <test name="LoginTest">
+    <test name="WebTest">
         <classes>
-            <class name="com.restsample.apitest.businessLogics.LoginTest"/>
+            <class name="com.restsample.apitest.businessLogics.WebTest"/>
         </classes>
     </test>
 </suite>
