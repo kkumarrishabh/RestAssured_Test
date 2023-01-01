@@ -10,6 +10,7 @@ import com.restsample.apitest.actions.Waits;
 import com.restsample.apitest.utilities.Helper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.relevantcodes.extentreports.ExtentTest;
 import com.restsample.apitest.JSONProperties.*;
 import com.restsample.webtest.Waits.WebDriverExtensions;
 
@@ -40,7 +41,7 @@ public WebDriver driver;
 	By nextButton = By.xpath("//*[@id='shipping-method-buttons-container']//button");
 	
 	
-	public SignupPage (WebDriver driver){
+	public SignupPage (WebDriver driver, ExtentTest test){
 		this.driver=driver;
 	}
 	

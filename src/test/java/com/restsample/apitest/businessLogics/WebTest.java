@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.restsample.apitest.JSONProperties.MyData;
+import com.restsample.apitest.actions.HttpOperation;
 import com.restsample.apitest.listeners.ExtentTestManager;
 import com.restsample.webtest.PageObjects.PaymentAndConfirmationPage;
 import com.restsample.webtest.PageObjects.ProductDetailsPage;
@@ -21,8 +22,10 @@ import com.restsample.webtest.PageObjects.ProductSearchResultsPage;
 import com.restsample.webtest.PageObjects.ShippingdetailsPage;
 import com.restsample.webtest.PageObjects.ShopMenu;
 import com.restsample.webtest.PageObjects.SignupPage;
-import com.restsample.webtest.PageObjects.home;
+import com.restsample.webtest.PageObjects.HomePage;
 import com.restsample.webtest.baseWeb.base;
+
+import io.restassured.RestAssured;
 
 @Listeners(com.restsample.apitest.listeners.TestStatusListener.class)  
 public class WebTest extends base{
@@ -42,12 +45,12 @@ public class WebTest extends base{
 		
 		ExtentTest test = ExtentTestManager.startTest(method.getName(), "Description: Valid Login Scenario with username and password.");
 		
-		home h = new home(driver);
-		SignupPage signup = new SignupPage(driver);
-		ShopMenu shopmenu = new ShopMenu(driver);
-		ProductSearchResultsPage prodsearch = new ProductSearchResultsPage(driver);
-		ProductDetailsPage proddetails = new ProductDetailsPage(driver);
-		PaymentAndConfirmationPage payment = new PaymentAndConfirmationPage(driver);
+		HomePage h = new HomePage(driver, test);
+		SignupPage signup = new SignupPage(driver, test);
+		ShopMenu shopmenu = new ShopMenu(driver, test);
+		ProductSearchResultsPage prodsearch = new ProductSearchResultsPage(driver, test);
+		ProductDetailsPage proddetails = new ProductDetailsPage(driver, test);
+		PaymentAndConfirmationPage payment = new PaymentAndConfirmationPage(driver, test);
 		
 		h.ClickSignUp();
 		ExtentTestManager.getTest().log(LogStatus.INFO, "Signup is success");
@@ -65,7 +68,23 @@ public class WebTest extends base{
 		payment.AssertConfirmation();
 	}
 	
+	@Test
+	public void Any_APi_Test(Method method) {
+		ExtentTest test = ExtentTestManager.startTest(method.getName(), "Description: Valid Login Scenario with username and password.");
+		
+		  getLoginToken();
+		  init(RestAssured.baseURI + "api/", HttpOperation.GET);
+		  ExtentTestManager.getTest().log(LogStatus.INFO, RestAssured.baseURI + "/api/users?page=2");
+		  callIt();
+		  assertIt(200);
+		  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response code");
+	}
 	
+	@Test
+	public void ThisFails(Method method) {
+		ExtentTest test = ExtentTestManager.startTest(method.getName(), "Description: Valid Login Scenario with username and password.");
+		assertTrue(false);
+	}
 	@AfterTest
 	public void closeDriver() throws IOException {
 		

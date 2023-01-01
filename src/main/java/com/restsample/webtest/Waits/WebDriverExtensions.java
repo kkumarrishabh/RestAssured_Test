@@ -36,6 +36,7 @@ public class WebDriverExtensions {
     {
         try
         {
+        	
             WaitForElementPresent(driver, locator, timeOut);
             
             driver.findElement(locator).clear();

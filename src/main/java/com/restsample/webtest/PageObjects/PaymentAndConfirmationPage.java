@@ -12,6 +12,7 @@ import com.restsample.apitest.actions.Waits;
 import com.restsample.apitest.utilities.Helper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.relevantcodes.extentreports.ExtentTest;
 import com.restsample.apitest.JSONProperties.*;
 import com.restsample.webtest.Waits.WebDriverExtensions;
 
@@ -26,7 +27,7 @@ public WebDriver driver;
 
 	
 	
-	public PaymentAndConfirmationPage (WebDriver driver){
+	public PaymentAndConfirmationPage (WebDriver driver, ExtentTest test){
 		this.driver=driver;
 	}
 	
@@ -38,13 +39,11 @@ public WebDriver driver;
 	}
 	
 	public void AssertConfirmation(){
-		/*
-		 * String expected = "Thank you for your purchase!";
-		 * WebDriverExtensions.WaitTillLoader(driver, Loader, 60); try { String actual =
-		 * WebDriverExtensions.GetText(driver, OrderConfirmation, 90);
-		 * assertTrue(actual.equals(expected)); } catch(Exception e){ assertTrue(false);
-		 * }
-		 */
-		assertTrue(true);
+		
+		  String expected = "Thank you for your purchase!";
+		  WebDriverExtensions.WaitTillLoader(driver, Loader, 60); try { String actual =
+		  WebDriverExtensions.GetText(driver, OrderConfirmation, 90);
+		  assertTrue(actual.equals(expected)); } catch(Exception e){ assertTrue(false);
+		  }
 	}
 }

@@ -15,8 +15,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relevantcodes.extentreports.LogStatus;
 import com.restsample.apitest.JSONProperties.MyData;
 import com.restsample.apitest.actions.HttpOperation;
-import com.restsample.apitest.baseAPI.Auth;
 import com.restsample.apitest.listeners.ExtentTestManager;
+import com.restsample.webtest.baseWeb.base;
 
 import io.restassured.RestAssured;
 
@@ -48,16 +48,15 @@ public class Helper {
 	}
 	
 	public MyData ApiRequestTest(Method method) throws JSONException, JsonMappingException, JsonProcessingException {
-		  ExtentTestManager.startTest("Test1", "This is a test");
-		  Auth response = new Auth();
+		  base response = new base();
 		  MyData data = null;
 		  try {
 			  response.getLoginToken();
 			  response.init(RestAssured.baseURI + "api/", HttpOperation.GET);
-			  ExtentTestManager.getTest().log(LogStatus.INFO, RestAssured.baseURI + "/api/users?page=2");
+			  ExtentTestManager.getTest().log(LogStatus.INFO, "requesting Random User data");
 			  response.callIt();
 			  response.assertIt(200);
-			  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response code");
+			  ExtentTestManager.getTest().log(LogStatus.INFO, "Data is recieved successfully");
 			  ObjectMapper mapper = new ObjectMapper();
 			  mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			  String str = response.getResponseString();

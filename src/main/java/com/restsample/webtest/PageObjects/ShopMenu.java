@@ -3,6 +3,7 @@ package com.restsample.webtest.PageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.relevantcodes.extentreports.ExtentTest;
 import com.restsample.apitest.JSONProperties.MyData;
 import com.restsample.webtest.Waits.WebDriverExtensions;
 
@@ -10,7 +11,7 @@ public class ShopMenu {
 
 public WebDriver driver;	
 	
-public ShopMenu (WebDriver driver) {
+public ShopMenu (WebDriver driver, ExtentTest test) {
 	this.driver=driver;
 }
 	By MenSection = By.id("ui-id-5");

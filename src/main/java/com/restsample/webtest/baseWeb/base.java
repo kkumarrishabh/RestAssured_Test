@@ -10,15 +10,27 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.restsample.apitest.restassuredFuntions.API;
 import com.restsample.webtest.PageObjects.ShopMenu;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class base {
+public class base extends API {
 
 	public static WebDriver driver;
 	public Properties prop;
-
+	
+	private void createToken() {
+		initBase("Host");
+		//This is the place holder for generating login token if any. This Method can be parameterised with username and password
+	}
+	
+	public String getLoginToken() {
+		createToken();
+		//System.out.println(response);
+		return " ";
+	}
+	
 	public WebDriver initializeDriver() throws IOException {
 		
 		ChromeOptions chromeOptions = new ChromeOptions();
