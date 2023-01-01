@@ -1,6 +1,7 @@
 package com.restsample.apitest.businessLogics;
 
 import static org.testng.Assert.assertTrue;
+import java.lang.reflect.Method;
 
 import java.io.IOException;
 
@@ -10,7 +11,10 @@ import org.testng.annotations.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.restsample.apitest.JSONProperties.MyData;
+import com.restsample.apitest.listeners.ExtentTestManager;
 import com.restsample.webtest.PageObjects.PaymentAndConfirmationPage;
 import com.restsample.webtest.PageObjects.ProductDetailsPage;
 import com.restsample.webtest.PageObjects.ProductSearchResultsPage;
@@ -20,6 +24,7 @@ import com.restsample.webtest.PageObjects.SignupPage;
 import com.restsample.webtest.PageObjects.home;
 import com.restsample.webtest.baseWeb.base;
 
+@Listeners(com.restsample.apitest.listeners.TestStatusListener.class)  
 public class WebTest extends base{
 	
 	public MyData json;
@@ -32,8 +37,10 @@ public class WebTest extends base{
 		driver =initializeDriver();
 	}
 	
-	@Test (priority=1)
-	public void TestRegistration() throws InterruptedException, JsonMappingException, JsonProcessingException, JSONException {
+	@Test
+	public void TestRegistration(Method method) throws InterruptedException, JsonMappingException, JsonProcessingException, JSONException {
+		
+		ExtentTest test = ExtentTestManager.startTest(method.getName(), "Description: Valid Login Scenario with username and password.");
 		
 		home h = new home(driver);
 		SignupPage signup = new SignupPage(driver);
@@ -42,16 +49,19 @@ public class WebTest extends base{
 		ProductDetailsPage proddetails = new ProductDetailsPage(driver);
 		PaymentAndConfirmationPage payment = new PaymentAndConfirmationPage(driver);
 		
-		
-		
 		h.ClickSignUp();
+		ExtentTestManager.getTest().log(LogStatus.INFO, "Signup is success");
 		signup.fillCustomerDetails();
-		signup.clickCreateAccount();
+		ExtentTestManager.getTest().log(LogStatus.INFO, "Fill details is success");
+		signup.clickCreateAccount(); 
+		ExtentTestManager.getTest().log(LogStatus.INFO, "Create Account");
 		shopmenu.doChooseMenTopsJacket();
 		prodsearch.doClickImage();
 		proddetails.doSelectProductAndAddToCart();
-		signup.fillshippingDetails();
+		ExtentTestManager.getTest().log(LogStatus.INFO, "Product added to cart");
+		signup.fillshippingDetails(); 
 		payment.doclickPlaceOrder();
+		ExtentTestManager.getTest().log(LogStatus.INFO, "Placing Order now");
 		payment.AssertConfirmation();
 	}
 	

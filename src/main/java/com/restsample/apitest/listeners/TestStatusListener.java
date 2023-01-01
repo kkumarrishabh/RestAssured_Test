@@ -14,12 +14,10 @@ public class TestStatusListener implements ITestListener {
         return iTestResult.getMethod().getConstructorOrMethod().getName();
     }
  
-    
     public void onStart(ITestContext iTestContext) {
         System.out.println("Initializing TestClass - " + iTestContext.getName());
     }
  
-    
     public void onFinish(ITestContext iTestContext) {
         System.out.println("Finishing TestClass - " + iTestContext.getName());
         //Do tier down operations for extentreports reporting!
@@ -27,19 +25,16 @@ public class TestStatusListener implements ITestListener {
         ExtentManager.getReporter().flush();
     }
  
-    
     public void onTestStart(ITestResult iTestResult) {
         System.out.println("Initializing test method " + getTestMethodName(iTestResult) + " start");
     }
  
-    
     public void onTestSuccess(ITestResult iTestResult) {
         System.out.println("Test method " + getTestMethodName(iTestResult) + " succeed");
         //ExtentReports log operation for passed tests.
         ExtentTestManager.getTest().log(LogStatus.PASS, "Test passed");
     }
  
-    
     public void onTestFailure(ITestResult iTestResult) {
         System.out.println("Test method  " + getTestMethodName(iTestResult) + " failed");
  
@@ -50,14 +45,14 @@ public class TestStatusListener implements ITestListener {
         ExtentTestManager.getTest().log(LogStatus.FAIL, "Test Failed");
     }
  
-    
+    @Override
     public void onTestSkipped(ITestResult iTestResult) {
         System.out.println("Test method " + getTestMethodName(iTestResult) + " skipped");
         //ExtentReports log operation for skipped tests.
         ExtentTestManager.getTest().log(LogStatus.SKIP, "Test Skipped");
     }
  
-    
+    @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
         System.out.println("Test failed but it is in defined success ratio " + getTestMethodName(iTestResult));
     }
